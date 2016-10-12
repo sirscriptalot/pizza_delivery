@@ -1,6 +1,6 @@
-require_relative './postal/version'
-
 module Postal
+  VERSION = '0.1.0'.freeze
+
   module Handler
     def handle(service_class, callback, *args)
       service_class.new(self, callback, *args).call
