@@ -18,6 +18,16 @@ Or install it yourself as:
 
     $ gem install postal
 
+
+For RubyMotion, install the gem and require the `postal_motion.rb` file.
+
+    `gem 'postal', require: 'postal_motion`
+
+This sets up the necessary files inside the RubyMotion app, you must also require
+the postal gem in your RubyMotion Rakefile:
+
+    `require 'postal'`
+
 ## Usage
 
 TODO

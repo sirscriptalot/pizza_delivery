@@ -1,4 +1,4 @@
-require_relative './lib/postal'
+require_relative './lib/postal/version'
 
 Gem::Specification.new do |s|
   s.name = 'postal'

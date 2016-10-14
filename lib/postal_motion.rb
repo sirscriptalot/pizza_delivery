@@ -10,8 +10,6 @@ end
 def require(*args); end
 def require_relative(*args); end
 
-lib = File.dirname(File.expand_path(__FILE__))
-
 Motion::Project::App.setup do |app|
   app.files.unshift(File.join(File.dirname(__FILE__), 'postal.rb'))
 end
