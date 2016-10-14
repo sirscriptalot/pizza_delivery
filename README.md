@@ -1,13 +1,13 @@
-# Postal
+# Pizza Delivery
 
-Postal is a tiny library for implementing a service layer abstraction.
+Pizza Delivery is a tiny library for implementing a service layer abstraction.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'postal'
+gem 'pizza_delivery'
 ```
 
 And then execute:
@@ -16,17 +16,10 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install postal
+    $ gem install pizza_delivery
 
 
-For RubyMotion, install the gem and require the `postal_motion.rb` file.
-
-    `gem 'postal', require: 'postal_motion`
-
-This sets up the necessary files inside the RubyMotion app, you must also require
-the postal gem in your RubyMotion Rakefile:
-
-    `require 'postal'`
+For RubyMotion, use the [Pizza Delivery Motion](https://github.com/sirscriptalot/pizza_delivery_motion) gem.
 
 ## Usage
 

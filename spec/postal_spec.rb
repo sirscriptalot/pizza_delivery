@@ -1,74 +1,74 @@
 require_relative './spec_helper'
 
-class Handler
-  include Postal::Handler
+class Caller
+  include PizzaDelivery::Caller
 
-  attr_reader :status, :message
+  attr_reader :status, :payload
 
   def initialize
-    @status, @message = nil, nil
+    @status, @payload = nil, nil
   end
 
-  def receive(status, message)
-    @status, @message = status, message
+  def receive(status, payload)
+    @status, @payload = status, payload
   end
 end
 
-class Service < Postal::Service
+class Service < PizzaDelivery::Service
   def call
     deliver :status, {}
   end
 end
 
-describe Postal::Handler do
-  describe '#handle' do
+describe PizzaDelivery::Caller do
+  describe '#call' do
     before do
-      @handler = Handler.new
+      @caller = Caller.new
     end
 
     context 'callback is a symbol' do
       it 'responds to service with callback' do
-        @handler.status.must_be_nil
-        @handler.message.must_be_nil
+        @caller.status.must_be_nil
+        @caller.payload.must_be_nil
 
-        @handler.handle Service, :receive
+        @caller.call Service, :receive
 
-        @handler.status.wont_be_nil
-        @handler.message.wont_be_nil
+        @caller.status.wont_be_nil
+        @caller.payload.wont_be_nil
       end
     end
 
     context 'callback is a string' do
       it 'responds to service with callback' do
-        @handler.status.must_be_nil
-        @handler.message.must_be_nil
+        @caller.status.must_be_nil
+        @caller.payload.must_be_nil
 
-        @handler.handle Service, "receive"
+        @caller.call Service, "receive"
 
-        @handler.status.wont_be_nil
-        @handler.message.wont_be_nil
+        @caller.status.wont_be_nil
+        @caller.payload.wont_be_nil
       end
     end
   end
 end
 
-describe Postal::Service do
+describe PizzaDelivery::Service do
   describe '#call' do
     it 'must be implemented by subclass' do
-      lambda { Postal::Service.new(nil, nil).call }.must_raise NotImplementedError
+      lambda { PizzaDelivery::Service.new(nil, nil).call }.must_raise NotImplementedError
     end
   end
 
   describe '#deliver' do
-    it 'calls handler callback with status, message' do
-      handler = Handler.new
-      service = Service.new(handler, :receive)
+    it 'calls caller callback with status, payload' do
+      caller = Caller.new
+      service = Service.new(caller, :receive)
       status = :status
-      message = { foo: :bar }
-      service.deliver status, message
+      payload = { foo: :bar }
+      service.deliver status, payload
 
-      handler.status.must_equal status
-      handler.message.must_equal message
+      caller.status.must_equal status
+      caller.payload.must_equal payload
     end
   end
 end
