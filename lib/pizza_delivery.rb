@@ -8,10 +8,10 @@ module PizzaDelivery
   end
 
   class Service
-    attr_reader :caller, :callback
+    attr_reader :caller_instance, :callback
 
-    def initialize(caller, callback, *args)
-      @caller = caller
+    def initialize(caller_instance, callback, *args)
+      @caller_instance = caller_instance
       @callback = callback
       @args = args
     end
@@ -21,7 +21,7 @@ module PizzaDelivery
     end
 
     def deliver(status, payload)
-      caller.send(callback, status, payload)
+      caller_instance.send(callback, status, payload)
     end
   end
 end

@@ -23,30 +23,30 @@ end
 describe PizzaDelivery::Caller do
   describe '#call' do
     before do
-      @caller = Caller.new
+      @caller_instance = Caller.new
     end
 
     context 'callback is a symbol' do
       it 'responds to service with callback' do
-        @caller.status.must_be_nil
-        @caller.payload.must_be_nil
+        @caller_instance.status.must_be_nil
+        @caller_instance.payload.must_be_nil
 
-        @caller.call Service, :receive
+        @caller_instance.call Service, :receive
 
-        @caller.status.wont_be_nil
-        @caller.payload.wont_be_nil
+        @caller_instance.status.wont_be_nil
+        @caller_instance.payload.wont_be_nil
       end
     end
 
     context 'callback is a string' do
       it 'responds to service with callback' do
-        @caller.status.must_be_nil
-        @caller.payload.must_be_nil
+        @caller_instance.status.must_be_nil
+        @caller_instance.payload.must_be_nil
 
-        @caller.call Service, "receive"
+        @caller_instance.call Service, "receive"
 
-        @caller.status.wont_be_nil
-        @caller.payload.wont_be_nil
+        @caller_instance.status.wont_be_nil
+        @caller_instance.payload.wont_be_nil
       end
     end
   end
@@ -60,15 +60,15 @@ describe PizzaDelivery::Service do
   end
 
   describe '#deliver' do
-    it 'calls caller callback with status, payload' do
-      caller = Caller.new
-      service = Service.new(caller, :receive)
+    it 'calls caller_instance callback with status, payload' do
+      caller_instance = Caller.new
+      service = Service.new(caller_instance, :receive)
       status = :status
       payload = { foo: :bar }
       service.deliver status, payload
 
-      caller.status.must_equal status
-      caller.payload.must_equal payload
+      caller_instance.status.must_equal status
+      caller_instance.payload.must_equal payload
     end
   end
 end
